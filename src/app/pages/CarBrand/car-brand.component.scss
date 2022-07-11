@@ -1,3 +1,268 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.car-brand-main {
+  height: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  & .gutter-row {
+    &.left {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: auto;
+      width: auto;
+
+      & .car-brand-label {
+        color: rgba(47, 70, 95, 1);
+        font-family: 'Poppins SemiBold';
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        width: fit-content;
+        height: 40px;
+        display: flex;
+        align-items: center;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      & .car-brand-dropdown {
+        width: fit-content;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 21px;
+
+        font-family: 'Poppins';
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        color: #232323;
+
+        & .anticon-up {
+          font-size: 10px;
+          vertical-align: baseline;
+          margin-right: 17px;
+        }
+        & .anticon-down {
+          font-size: 10px;
+          vertical-align: baseline;
+          margin-right: 17px;
+        }
+      }
+    }
+
+    &.right {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  & nz-row:nth-of-type(2) {
+    overflow: auto;
+    height: -webkit-fill-available;
+      
+    &::-webkit-scrollbar-track {
+      //box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      background-color: transparent;
+    }
+    
+    &::-webkit-scrollbar {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0,0,0,.1);
+      background-color: #adadad;
+      min-height: 40px;
+      padding-top: 10px;
+    }
+  }
+}
+
+.car-brand-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  width: 240px;
+  height: 40px;
+  background: #f5f5f5;
+  border-radius: 9999px;
+  border: 0;
+
+  &>input {
+    height: 22px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #8c8c8c;
+    background: inherit;
+  }
+}
+
+.car-brand-dropdown-menu {
+  max-width: 164px;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0px -1px 2px rgb(35 35 35 / 8%), 0px 4px 8px rgb(35 35 35 / 10%);
+  border-radius: 4px;
+  width: 164px;
+
+  & .ant-dropdown-menu-item:hover {
+    margin: 0 5px;
+  }
+  & .ant-dropdown-menu-item-selected {
+    margin: 0 5px;
+  }
+}
+
+.car-brand-btn-add {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 9px 16px;
+  gap: 12px;
+
+  width: 139px;
+  height: 40px;
+
+  background: #0F5EDD;
+  border-radius: 4px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+
+  display: flex;
+  align-items: center;
+
+  color: #FFFFFF;
+}
+
+.car-brand-list-item {
+  width: 100%;
+  height: 124px;
+  background: #FFFFFF;
+  box-shadow: inset 0px -1px 0px #F1F1F1;
+
+  & .brand-content {
+    display: flex;
+    flex-direction: column;
+
+    &>label {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 30px;
+      color: #2F465F;
+    }
+
+    &>.brand-content-describe {
+      &>span {
+        font-size: 14px;
+        line-height: 22px;
+
+        &:nth-of-type(1)  {
+          font-weight: 400;
+          color: #8C8C8C;
+        }
+        &:nth-of-type(2) {
+          font-weight: 500;
+          color: #0F5EDD;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  & .brand-content-update{
+    display: flex;
+    flex-direction: column;
+    &>span {
+      font-size: 14px;
+      line-height: 30px;
+
+      &:nth-of-type(1)  {
+        font-weight: 500;
+        color: #2F465F;
+      }
+      &:nth-of-type(2) {
+        font-weight: 400;
+        color: #8C8C8C;
+      }
+    }
+  }
+
+  & .status-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    gap: 8px;
+
+    width: 111px;
+    height: 40px;
+
+    background: #FAFAFA;
+    border-radius: 4px;
+    border: 0;
+
+    & .status-icon {
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+    }
+
+    & .status-text {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  & .btn-view-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 16px;
+    gap: 10px;
+    width: 118px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #B4B4B4;
+    
+    & span.ng-star-inserted {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+
+      display: flex;
+      align-items: center;
+      color: #232323;
+    }
+  }
+}
+
+
 .demo-loadmore-list {
   min-height: 350px;
 }

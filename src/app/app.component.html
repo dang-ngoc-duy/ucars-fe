@@ -6,19 +6,14 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+      <a href="https://ucars.sg/" target="_blank">
+        <div class="logo"></div>
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter>
-        <i nz-icon nzType="car" nzTheme="outline" style="margin-right: 10px;"></i>
-        <a routerLink="/car-brand">Car Brand</a>
-      </li>
-      <li nz-menu-item nzMatchRouter>
-        <i nz-icon nzType="car" nzTheme="outline" style="margin-right: 10px;"></i>
-        <a routerLink="/car-model">Car Model</a>
+    <ul class="sidebar-item" nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li routerLink="/car-brand" nz-menu-item>
+        <i nz-icon nzType="car"></i>
+        <span>Car Brands</span>
       </li>
     </ul>
   </nz-sider>
