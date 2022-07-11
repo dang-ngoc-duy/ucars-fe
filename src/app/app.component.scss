@@ -14,6 +14,9 @@
   z-index: 10;
   min-height: 100vh;
   box-shadow: 2px 0 6px rgba(0,21,41,.35);
+
+  width: 240px;
+  background: #323435;
 }
 
 .header-trigger {
@@ -34,15 +37,21 @@
   padding-left: 24px;
   overflow: hidden;
   line-height: 64px;
-  background: #001529;
+  background: #323435;
   transition: all .3s;
-}
-
-.sidebar-logo img {
-  display: inline-block;
-  height: 32px;
-  width: 32px;
-  vertical-align: middle;
+  margin-bottom: 47px;
+  
+  & .logo {
+    text-align: center;
+    background-image: url('/assets/img/ucars_logo.png');
+    background-size: contain;
+    background-position: 50% 18%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 50%;
+    vertical-align: middle;
+    margin: 16px auto 16px 0;
+  }
 }
 
 .sidebar-logo h1 {
@@ -59,6 +68,17 @@ nz-header {
   padding: 0;
   width: 100%;
   z-index: 2;
+}
+nz-sider {
+  & .sidebar-item {
+    background: #323435;
+    &>li {
+      width: initial;
+      margin: 0 10px;
+      border-radius: 10px;
+      padding: 0 22px;
+    }
+  }
 }
 
 .app-header {
@@ -77,4 +97,7 @@ nz-content {
   padding: 24px;
   background: #fff;
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
 }

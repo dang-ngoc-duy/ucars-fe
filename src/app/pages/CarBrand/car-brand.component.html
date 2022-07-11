@@ -1,76 +1,218 @@
-<div>
-  <nz-row [nzGutter]="16">
-    <nz-col class="gutter-row" [nzSpan]="6">
-      <label>CAR BRANDS LIST</label>
+<div class="car-brand-main">
+  <nz-row [nzGutter]="24" nzJustify="start">
+    <nz-col class="gutter-row left">
+      <label class="car-brand-label">CAR BRANDS LIST</label>
     </nz-col>
-    <nz-col class="gutter-row" [nzSpan]="6">
-      <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
-        View All
+    <nz-col class="gutter-row left">
+      <a
+        class="car-brand-dropdown"
+        nz-dropdown
+        nzTrigger="click"
+        [nzDropdownMenu]="menu"
+      >
         <i nz-icon nzType="down"></i>
+        <span> {{ selectedFilter }} </span>
       </a>
       <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu>
-          <li nz-menu-item>All</li>
-          <li nz-menu-item>Last Updated</li>
-          <li nz-menu-item>Brand Name</li>
-          <li nz-menu-item>Number of Models</li>
+        <ul nz-menu nzSelectable class="car-brand-dropdown-menu">
+          <li
+            *ngFor="let item of filterList"
+            (click)="handleOnChangeFilter(item.id)"
+            nz-menu-item
+          >
+            {{ item.label }}
+          </li>
         </ul>
       </nz-dropdown-menu>
     </nz-col>
-    <nz-col class="gutter-row" [nzSpan]="6">
+
+    <nz-col class="gutter-row right">
       <div class="inner-box">
-        <nz-input-group [nzSuffix]="suffixIconSearch">
-          <input type="text" nz-input placeholder="input search text" />
-        </nz-input-group>
-        <ng-template #suffixIconSearch>
-          <i nz-icon nzType="search"></i>
+        <ng-template #prefixIconSearch>
+          <i
+            nz-icon
+            nzType="search"
+            style="font-size: 18px; color: #5f5f5f"
+          ></i>
         </ng-template>
+        <nz-input-group [nzPrefix]="prefixIconSearch" class="car-brand-search">
+          <input type="text" nz-input placeholder="Search car brand" />
+        </nz-input-group>
       </div>
     </nz-col>
-    <nz-col class="gutter-row" [nzSpan]="6">
+    <nz-col
+      class="gutter-row right"
+      style="justify-self: end; margin-left: auto"
+    >
       <div class="inner-box">
-        <button nz-button nzType="primary">
-          <i nz-icon nzType="search"></i>
-          Search
+        <button
+          nz-button
+          nzType="primary"
+          class="car-brand-btn-add"
+          (click)="showModal()"
+        >
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
+          Add Brand
         </button>
       </div>
     </nz-col>
   </nz-row>
-  <nz-row [nzGutter]="16">
-    <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
-      <nz-list-item *ngFor="let item of list">
-        <ng-container *ngIf="!item.loading">
-          <nz-list-item-meta
-            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team"
-          >
-            <nz-list-item-meta-title>
-              <a href="https://ng.ant.design">{{ item.name.last }}</a>
-            </nz-list-item-meta-title>
-          </nz-list-item-meta>
-          content
-          <ul nz-list-item-actions>
-            <nz-list-item-action
-              ><a>edit</a></nz-list-item-action
-            >
-            <nz-list-item-action
-              ><a>more</a></nz-list-item-action
-            >
-          </ul>
-        </ng-container>
-        <nz-skeleton
-          *ngIf="item.loading"
-          [nzAvatar]="true"
-          [nzActive]="true"
-          [nzTitle]="false"
-          [nzLoading]="true"
-        ></nz-skeleton>
-      </nz-list-item>
-      <div class="loadmore" nz-list-load-more>
-        <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">
-          loading more
-        </button>
-      </div>
-    </nz-list>
+  <nz-row [nzGutter]="24" style="margin-top: 18px">
+    <nz-col class="gutter-row" nzSpan="24">
+      <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
+        <nz-list-item *ngFor="let item of list" class="car-brand-list-item">
+          <ng-container *ngIf="!item.loading" class="car-brand-item">
+            <label
+              class="car-brand-checkbox"
+              nz-checkbox
+              nzChecked="false"
+            ></label>
+            <nz-avatar
+              [nzShape]="'square'"
+              [nzSize]="64"
+              [nzIcon]="'car'"
+            ></nz-avatar>
+            <nz-divider
+              style="border-left: 2px solid rgba(15, 201, 123, 1); height: 64px"
+              nzType="vertical"
+            ></nz-divider>
+            <div class="brand-content">
+              <label>{{ item.name.last }}</label>
+              <div class="brand-content-describe">
+                <span>Jeep Grand Cherokee</span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span routerLink="./car-model">1200 Models</span>
+              </div>
+            </div>
+            <div class="brand-content-update">
+              <span>Last Update</span>
+              <span>25/12/2022</span>
+            </div>
+            <div class="status-block">
+              <span class="status-icon" style="background: #1f7b4d"></span>
+              <span class="status-text" style="color: #1f7b4d">Active</span>
+            </div>
+            <button routerLink="./detail/{{item.name.last}}" class="btn-view-detail" nz-button nzType="default">
+              View details
+            </button>
+          </ng-container>
+          <nz-skeleton
+            *ngIf="item.loading"
+            [nzAvatar]="true"
+            [nzActive]="true"
+            [nzTitle]="false"
+            [nzLoading]="true"
+          ></nz-skeleton>
+        </nz-list-item>
+        <div class="loadmore" nz-list-load-more>
+          <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">
+            loading more
+          </button>
+        </div>
+      </nz-list>
+    </nz-col>
   </nz-row>
 </div>
+
+<!-- Add brand Modal -->
+<nz-modal
+  class="modal-car-brand"
+  [(nzVisible)]="isVisible"
+  nzTitle='
+  <div class="modal-title">
+    <span>Add Card Brand</span>
+    <span>Setup new car brand</span>
+  </div>'
+  (nzOnCancel)="handleCancel()"
+>
+  <div *nzModalContent class="modal-body">
+    <label class="content-label">Brand Logo</label>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <div class="logo-add">
+      <i nz-icon nzType="plus" nzTheme="outline"></i>
+      <label>Brand Logo</label>
+    </div>
+    <label class="content-label">Brand Details</label>
+    <nz-divider nzType="horizontal"></nz-divider>
+
+    <form>
+      <nz-row [nzGutter]="24">
+        <nz-col class="gutter-row" nzSpan="12">
+          <label>Brand Name</label>
+          <input nz-input placeholder="Input Content" />
+        </nz-col>
+        <nz-col
+          class="gutter-row brand-status-block"
+          nzSpan="12"
+        >
+          <label>Brand Status</label>
+          <a
+            class="select-status"
+            nz-dropdown
+            nzTrigger="click"
+            [nzDropdownMenu]="statusMenu"
+          >
+            <div class="select-status-item {{selectedStatus.id}}">
+              <div class="outside-circle">
+                <span class="inside-circle"></span>
+              </div>
+              <span>{{ selectedStatus.label }}</span>
+              <i nz-icon nzType="down"></i>
+            </div>
+          </a>
+          <nz-dropdown-menu #statusMenu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li
+                *ngFor="let opt of statusList"
+                nz-menu-item
+                (click)="handleOnStatusChange(opt.id)"
+              >
+                <div class="select-status-item {{ opt.id }}">
+                  <div class="outside-circle">
+                    <span class="inside-circle"></span>
+                  </div>
+                  <span>{{ opt.label }}</span>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+          <!-- <nz-select
+            class="select-status"
+            [(ngModel)]="selectedStatus.id"
+            name="status"
+          >
+            <nz-option
+              nzCustomContent
+              *ngFor="let opt of statusList"
+              [nzValue]="opt.id"
+              [nzLabel]="opt.label"
+            >
+              <div class="select-status-item {{ opt.id }}">
+                <div class="outside-circle">
+                  <span class="inside-circle"></span>
+                </div>
+                <span>{{ opt.label }}</span>
+              </div>
+            </nz-option>
+          </nz-select> -->
+        </nz-col>
+      </nz-row>
+      <nz-row [nzGutter]="24" style="margin-top: 16px">
+        <nz-col class="gutter-row" nzSpan="24">
+          <label>Brand Description</label>
+          <textarea
+            nz-input
+            placeholder="Input Content"
+            [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+          ></textarea>
+        </nz-col>
+      </nz-row>
+    </form>
+  </div>
+  <div *nzModalFooter class="modal-footer">
+    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+    <button nz-button nzType="primary" (click)="handleOk()">
+      Create Brand
+    </button>
+  </div>
+</nz-modal>
