@@ -1,0 +1,113 @@
+<div class="car-brand-detail">
+  <div class="brand-detail-title-logo-block">
+    <a (click)="goBack()">
+      <i nz-icon nzType="left" nzTheme="outline"></i>
+    </a>
+    <label>Brand Details</label>
+  </div>
+
+  <div class="brand-detail-logo-block">
+    <label>Brand Logo</label>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <div class="logo-add">
+      <input
+        type="file"
+        class="file-upload"
+        (change)="handleFileInput($event.target)"
+        accept=".png, .jpg"
+      />
+      <input hidden value="logoUploaded" />
+      <img class="logo-uploaded image" style="background-image: url({{logoUploaded}});" />
+      <div class="middle">
+        <div class="text">CHANGE</div>
+        <div class="text">LOGO</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-detail-info-block">
+    <label>Brand Details</label>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <form>
+      <nz-row [nzGutter]="24">
+        <nz-col class="gutter-row" nzSpan="12">
+          <label>Brand Name</label>
+          <span *ngIf="!isEditMode;else name_input">{{currentbrand?.name}}</span>
+          <ng-template #name_input>          
+            <input
+              name="name"
+              nz-input
+              placeholder="Input Content"
+              value="{{currentbrand?.name}}"
+            />
+          </ng-template>
+        </nz-col>
+        <nz-col class="gutter-row brand-status-block" nzSpan="12">
+          <label>Brand Status</label>
+          <a
+            class="select-status-detail"
+            nz-dropdown
+            nzTrigger="click"
+            [nzDropdownMenu]="statusMenu2"
+            [nzPlacement]="'topLeft'"
+          >
+            <div class="select-status-item {{ selectedStatus.id }}">
+              <div class="outside-circle">
+                <span class="inside-circle"></span>
+              </div>
+              <span>{{ selectedStatus.label }}</span>
+              <i nz-icon nzType="down"></i>
+            </div>
+          </a>
+          <nz-dropdown-menu #statusMenu2="nzDropdownMenu">
+            <ul nz-menu nzSelectable class="status-dropdown-menu">
+              <li
+                *ngFor="let opt of statusList"
+                nz-menu-item
+                (click)="handleOnStatusChange(opt.id)"
+              >
+                <div class="select-status-item {{ opt.id }}">
+                  <div class="outside-circle">
+                    <span class="inside-circle"></span>
+                  </div>
+                  <span>{{ opt.label }}</span>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+          <input
+            name="status"
+            hidden
+            value="selectedStatus.label"
+          />
+        </nz-col>
+      </nz-row>
+      <nz-row [nzGutter]="24" style="margin-top: 16px">
+        <nz-col class="gutter-row" nzSpan="24">
+          <label>Brand Description</label>
+          <span *ngIf="!isEditMode;else describe_input" style="margin-bottom: 68px;">{{currentbrand?.describe}}</span>
+          <ng-template #describe_input>          
+            <textarea
+              nz-input
+              placeholder="Input Content"
+              [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+              [value]="currentbrand?.describe"
+            ></textarea>
+          </ng-template>
+        </nz-col>
+      </nz-row>
+      <nz-row [nzGutter]="24" style="margin-top: 16px;">
+        <nz-col class="gutter-row" nzSpan="24">
+          <button
+            nz-button
+            nzType="primary"
+            class="brand-detail-btn-add"
+            (click)="handleEditInfo()"
+          >
+            {{ [(btnText)] }}
+          </button>
+        </nz-col>
+      </nz-row>
+    </form>
+  </div>
+</div>

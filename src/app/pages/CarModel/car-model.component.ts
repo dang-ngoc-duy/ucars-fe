@@ -1,23 +1,18 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
+import { catchError, of } from 'rxjs';
 import { CarBrand } from 'src/app/models/carbrand.model';
-import {
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
 
-const getAllCarBrand = 'http://localhost:8000/api/v1/carbrands';
+const getAllCarModel = 'http://localhost:8000/api/v1/carbrands';
 
 @Component({
-  selector: 'app-car-brand',
-  templateUrl: './car-brand.component.html',
-  styleUrls: ['./car-brand.component.scss'],
+  selector: 'app-car-model',
+  templateUrl: './car-model.component.html',
+  styleUrls: ['./car-model.component.scss']
 })
-export class CarBrandComponent implements OnInit {
+
+export class CarModelComponent implements OnInit {
   initLoading = true;
   loadingMore = false;
   data: any[] = [];
@@ -60,7 +55,7 @@ export class CarBrandComponent implements OnInit {
 
   getData(callback: (res: any) => void): void {
     this.http
-      .get(getAllCarBrand)
+      .get(getAllCarModel)
       .pipe(catchError(() => of({ data: [] })))
       .subscribe((res: any) => callback(res));
   }
